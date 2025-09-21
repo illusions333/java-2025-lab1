@@ -24,7 +24,8 @@ public class Person {
 
 
     public String getFirstName() {
-        return firstName;
+        if (firstName != null) return firstName;
+        return "No first name provided";
     }
 
     public void setFirstName(String firstName) {
@@ -34,7 +35,8 @@ public class Person {
     }
 
     public String getLastName() {
-        return lastName;
+        if (lastName != null) return lastName;
+        return "No last name provided";
     }
 
     public void setLastName(String lastName) {
@@ -44,7 +46,8 @@ public class Person {
     }
 
     public String getEmail() {
-        return email;
+        if (email != null) return email;
+        return "No email address provided";
     }
 
     public void setEmail(String email) {
@@ -67,11 +70,9 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+        return "Person {firstName: " + firstName +
+                ", lastName: " + lastName +
+                ", email: " + email + '}';
     }
 
     @Override
