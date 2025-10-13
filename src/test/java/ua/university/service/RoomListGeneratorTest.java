@@ -103,7 +103,7 @@ public class RoomListGeneratorTest {
             @DisplayName("Should return 'null' in the result when room is null")
             void testShouldReturnNullInTheResultWhenRoomIsNull() {
                 assertEquals(RoomListGenerator.generateRoomList(new Room[] {null, new Room(121, "presidential", 4, 125, RoomStatus.CLEANING)}), "null\n" +
-                        "Room #121: size - big, capacity - 4, room status - cleaning, price - 125,000000\n");
+                        "Room #121: size - big, capacity - 4, room status - cleaning, price - 125.000000\n");
             }
         }
     }
