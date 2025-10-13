@@ -245,11 +245,11 @@ class ValidationHelperTest {
             assertFalse(ValidationHelper.isValidDate(LocalDate.of(2023, 9, 10)));
             assertFalse(ValidationHelper.isValidDate(LocalDate.of(2025, 11, 11)));
         }
-        //was written 12.10.2025
+        //was written 13.10.2025
         @Test
         @DisplayName("Valid date testing")
         void testValidDate() {
-            assertTrue(ValidationHelper.isValidDate(LocalDate.of(2024, 10, 12)));
+            assertTrue(ValidationHelper.isValidDate(LocalDate.of(2024, 10, 13)));
             assertTrue(ValidationHelper.isValidDate(LocalDate.of(2025, 2, 28)));
             assertTrue(ValidationHelper.isValidDate(LocalDate.of(2025, 10, 19)));
         }

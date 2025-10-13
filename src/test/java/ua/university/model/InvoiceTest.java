@@ -110,9 +110,9 @@ public class InvoiceTest {
         @Test
         @DisplayName("toString testing")
         void testToString() {
-            assertEquals("Invoice {reservation: Reservation {guest: Guest {firstName: O, lastName: D, email: od@gmail.com, checkInDate: 11-10-2025}, " +
-                    "\nroom: Room {room number: 121, type: presidential, capacity: 4, price: 125.0, room status: occupied}, \nstartDate: 08-10-2025, endDate: 27-10-2025, \n" +
-                    "reservationStatus: checked in}, issueDate: 13-10-2025, totalAmount: 12500.0}", methodData.toString());
+            assertEquals("Invoice {reservation: Reservation {guest: Guest {firstName: O, lastName: D, email: od@gmail.com, checkInDate: 12-10-2025}, " +
+                    "\nroom: Room {room number: 121, type: presidential, capacity: 4, price: 125.0, room status: occupied}, \nstartDate: 09-10-2025, endDate: 28-10-2025, \n" +
+                    "reservationStatus: checked in}, issueDate: 14-10-2025, totalAmount: 12500.0}", methodData.toString());
         }
     }
 

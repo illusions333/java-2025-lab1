@@ -25,7 +25,7 @@
 
 ---
 
-### 📦 Пакет `ua.university.util`
+### 📦 Пакет `ua.university.utils`
 
 #### ✅ Класи утиліти:
 - `ValidationHelper`  
