@@ -1,4 +1,4 @@
-package ua.university.util;
+package ua.university.utils;
 
 public class PersonUtils {
 

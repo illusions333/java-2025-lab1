@@ -1,4 +1,4 @@
-package ua.university.util;
+package ua.university.utils;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -12,6 +12,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.time.LocalDate;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -206,6 +207,51 @@ class ValidationHelperTest {
         @DisplayName("Should return false when trimmed length is outside range")
         void testLengthOutsideRange(String text, int min, int max, boolean expected) {
             assertEquals(expected, ValidationHelper.isStringLengthBetween(text, min, max));
+        }
+    }
+
+    @Nested
+    @DisplayName("isValidPrice method testing")
+    class ValidPriceTests{
+        @Test
+        @DisplayName("Testing when price < 0")
+        void testNegativePrice() {
+            assertFalse(ValidationHelper.isValidPrice(-1));
+            assertFalse(ValidationHelper.isValidPrice(-12.23));
+            assertFalse(ValidationHelper.isValidPrice(-0.23));
+        }
+
+        @Test
+        @DisplayName("Testing when price >= 0")
+        void testPositivePrice() {
+            assertTrue(ValidationHelper.isValidPrice(0));
+            assertTrue(ValidationHelper.isValidPrice(12.23));
+            assertTrue(ValidationHelper.isValidPrice(0.23));
+        }
+    }
+
+    @Nested
+    @DisplayName("isValidDate method testing")
+    class ValidDateTests{
+        @Test
+        @DisplayName("Null date testing")
+        void testNullDate() {
+            assertFalse(ValidationHelper.isValidDate(null));
+        }
+        @Test
+        @DisplayName("Invalid date testing")
+        void testInvalidDate() {
+            assertFalse(ValidationHelper.isValidDate(LocalDate.of(2024, 10, 10)));
+            assertFalse(ValidationHelper.isValidDate(LocalDate.of(2023, 9, 10)));
+            assertFalse(ValidationHelper.isValidDate(LocalDate.of(2025, 11, 11)));
+        }
+        //was written 12.10.2025
+        @Test
+        @DisplayName("Valid date testing")
+        void testValidDate() {
+            assertTrue(ValidationHelper.isValidDate(LocalDate.of(2024, 10, 12)));
+            assertTrue(ValidationHelper.isValidDate(LocalDate.of(2025, 2, 28)));
+            assertTrue(ValidationHelper.isValidDate(LocalDate.of(2025, 10, 19)));
         }
     }
 }

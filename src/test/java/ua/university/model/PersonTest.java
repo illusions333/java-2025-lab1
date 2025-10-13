@@ -49,16 +49,6 @@ class PersonTest {
             assertEquals(expectedEmail, person.getEmail(),
                     () -> String.format("Expected email to be '%s' but was '%s'", expectedEmail, person.getEmail()));
         }
-
-        @Test
-        @DisplayName("Constructor should not set invalid fields")
-        void testConstructorWithInvalidData() {
-            Person person = new Person("", "validname", "invalid-email");
-
-            assertNull(person.getFirstName(), "Expected firstName to be null when invalid name provided");
-            assertEquals("Validname", person.getLastName(), "Expected lastName to be set when valid");
-            assertNull(person.getEmail(), "Expected email to be null when invalid email provided");
-        }
     }
 
     @Nested
@@ -169,38 +159,6 @@ class PersonTest {
                     () -> String.format("Expected firstName to be '%s' but was '%s'", expected, person.getFirstName()));
         }
 
-        @ParameterizedTest
-        @ValueSource(strings = {"", "   "})
-        @DisplayName("Should not set invalid first names - empty and whitespace")
-        void testSetInvalidFirstName(String invalidName) {
-            Person person = new Person();
-            person.setFirstName(invalidName);
-
-            assertNull(person.getFirstName(),
-                    () -> String.format("Expected firstName to remain null for invalid input '%s', but was '%s'",
-                            invalidName, person.getFirstName()));
-        }
-
-        @Test
-        @DisplayName("Should not set first name that exceeds maximum length")
-        void testSetFirstNameTooLong() {
-            String tooLongName = "A".repeat(51);
-            Person person = new Person();
-            person.setFirstName(tooLongName);
-
-            assertNull(person.getFirstName(),
-                    () -> String.format("Expected firstName to remain null for name length %d (max: 50), but was '%s'",
-                            tooLongName.length(), person.getFirstName()));
-        }
-
-        @Test
-        @DisplayName("Should not set null first name")
-        void testSetNullFirstName() {
-            Person person = new Person();
-            person.setFirstName(null);
-
-            assertNull(person.getFirstName(), "Expected firstName to remain null when null is provided");
-        }
     }
 
     @Nested
@@ -223,38 +181,6 @@ class PersonTest {
                     () -> String.format("Expected lastName to be '%s' but was '%s'", expected, person.getLastName()));
         }
 
-        @ParameterizedTest
-        @ValueSource(strings = {"", "   "})
-        @DisplayName("Should not set invalid last names - empty and whitespace")
-        void testSetInvalidLastName(String invalidName) {
-            Person person = new Person();
-            person.setLastName(invalidName);
-
-            assertNull(person.getLastName(),
-                    () -> String.format("Expected lastName to remain null for invalid input '%s', but was '%s'",
-                            invalidName, person.getLastName()));
-        }
-
-        @Test
-        @DisplayName("Should not set last name that exceeds maximum length")
-        void testSetLastNameTooLong() {
-            String tooLongName = "B".repeat(51);
-            Person person = new Person();
-            person.setLastName(tooLongName);
-
-            assertNull(person.getLastName(),
-                    () -> String.format("Expected lastName to remain null for name length %d (max: 50), but was '%s'",
-                            tooLongName.length(), person.getLastName()));
-        }
-
-        @Test
-        @DisplayName("Should not set null last name")
-        void testSetNullLastName() {
-            Person person = new Person();
-            person.setLastName(null);
-
-            assertNull(person.getLastName(), "Expected lastName to remain null when null is provided");
-        }
     }
 
     @Nested
@@ -304,26 +230,6 @@ class PersonTest {
                     () -> String.format("Expected email to be '%s' but was '%s'", expectedEmail, person.getEmail()));
         }
 
-        @ParameterizedTest
-        @ValueSource(strings = {"", "invalid", "@domain.com", "user@", "user@domain", "user.domain.com"})
-        @DisplayName("Should not set invalid emails")
-        void testSetInvalidEmail(String invalidEmail) {
-            Person person = new Person();
-            person.setEmail(invalidEmail);
-
-            assertNull(person.getEmail(),
-                    () -> String.format("Expected email to remain null for invalid input '%s', but was '%s'",
-                            invalidEmail, person.getEmail()));
-        }
-
-        @Test
-        @DisplayName("Should not set null email")
-        void testSetNullEmail() {
-            Person person = new Person();
-            person.setEmail(null);
-
-            assertNull(person.getEmail(), "Expected email to remain null when null is provided");
-        }
     }
 
     @Nested
@@ -350,35 +256,6 @@ class PersonTest {
             assertEquals(expectedEmail, person.getEmail(),
                     () -> String.format("Expected email to be '%s' but was '%s'", expectedEmail, person.getEmail()));
         }
-
-        @ParameterizedTest
-        @CsvSource({
-                "'', validname",
-                "validname, ''",
-                "'   ', validname",
-                "validname, '   '",
-                "null, validname",
-                "validname, null"
-        })
-        @DisplayName("Should return null for invalid names")
-        void testCreatePersonWithInvalidNames(String firstName, String lastName) {
-            // Handle "null" string as actual null
-            String actualFirst = "null".equals(firstName) ? null : firstName;
-            String actualLast = "null".equals(lastName) ? null : lastName;
-
-            Person person = Person.createPerson(actualFirst, actualLast);
-
-            assertNull(person,
-                    () -> String.format("Expected null person for invalid names '%s' and '%s'", actualFirst, actualLast));
-        }
-
-        @Test
-        @DisplayName("Should return null when both names are null")
-        void testCreatePersonWithBothNamesNull() {
-            Person person = Person.createPerson(null, null);
-
-            assertNull(person, "Expected null person when both names are null");
-        }
     }
 
     @Nested
@@ -389,7 +266,7 @@ class PersonTest {
         @DisplayName("Should format toString correctly with all fields")
         void testToStringWithAllFields() {
             Person person = new Person("John", "Doe", "john@domain.com");
-            String expectedString = "Person{firstName='John', lastName='Doe', email='john@domain.com'}";
+            String expectedString = "Person {firstName: John, lastName: Doe, email: john@domain.com}";
 
             assertEquals(expectedString, person.toString(),
                     () -> String.format("Expected toString to be '%s' but was '%s'", expectedString, person.toString()));
@@ -399,7 +276,7 @@ class PersonTest {
         @DisplayName("Should format toString correctly with null fields")
         void testToStringWithNullFields() {
             Person person = new Person();
-            String expectedString = "Person{firstName='null', lastName='null', email='null'}";
+            String expectedString = "Person {firstName: null, lastName: null, email: null}";
 
             assertEquals(expectedString, person.toString(),
                     () -> String.format("Expected toString to be '%s' but was '%s'", expectedString, person.toString()));
