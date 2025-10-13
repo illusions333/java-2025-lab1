@@ -92,11 +92,11 @@ public class RoomListGeneratorTest {
                         new Room(121, "presidential", 4, 125, RoomStatus.OCCUPIED),
                         new Room(121, "presidential", 4, 125, RoomStatus.AVAILABLE),
                         new Room(121, "presidential", 4, 125, null),
-                }), "Room #121: size - big, capacity - 4, room status - cleaning, price - 125,000000\n" +
-                        "Room #121: size - big, capacity - 4, room status - maintenance, price - 125,000000\n" +
-                        "Room #121: size - big, capacity - 4, room status - occupied, price - 125,000000\n" +
-                        "Room #121: size - big, capacity - 4, room status - available, price - 125,000000\n" +
-                        "Room #121: size - big, capacity - 4, room status - unknown, price - 125,000000\n");
+                }), "Room #121: size - big, capacity - 4, room status - cleaning, price - 125.000000\n" +
+                        "Room #121: size - big, capacity - 4, room status - maintenance, price - 125.000000\n" +
+                        "Room #121: size - big, capacity - 4, room status - occupied, price - 125.000000\n" +
+                        "Room #121: size - big, capacity - 4, room status - available, price - 125.000000\n" +
+                        "Room #121: size - big, capacity - 4, room status - unknown, price - 125.000000\n");
             }
 
             @Test
