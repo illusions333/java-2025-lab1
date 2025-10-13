@@ -73,7 +73,7 @@ public class TotalAmountGeneratorTest {
                                     new Service("Fixing the fridge", 1000),
                                     new Service("Fixing the floor", 1500)
                     }),
-                    "Room price - 125,000000\nService - service name: Cleaning, price: 500.000000\n" +
+                    "Room price - 125.000000\nService - service name: Cleaning, price: 500.000000\n" +
                             "Service - service name: Fixing the fridge, price: 1000.000000\n" +
                             "Service - service name: Fixing the floor, price: 1500.000000\n" +
                             "Total amount - 3125.000000\n");
