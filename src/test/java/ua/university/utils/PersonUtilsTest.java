@@ -1,4 +1,4 @@
-package ua.university.util;
+package ua.university.utils;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
