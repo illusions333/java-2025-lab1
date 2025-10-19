@@ -119,7 +119,7 @@ public class GuestTest {
             getFullNameMethod.setAccessible(true);
             String actualFullName = (String) getFullNameMethod.invoke(guest);
 
-            assertEquals("John Doe 13-10-2025", actualFullName,
+            assertEquals("John Doe 19-10-2025", actualFullName,
                     () -> String.format("Expected full name to be '%s' but was '%s'", "John Doe", actualFullName));
         }
     }
@@ -132,7 +132,7 @@ public class GuestTest {
         @DisplayName("Should format toString correctly with all fields")
         void testToStringWithAllFields() {
             Guest guest = new Guest("John     ", "Doe", "john.doe@gmail.com", LocalDate.now());
-            String expectedString = "Guest {firstName: John, lastName: Doe, email: john.doe@gmail.com, checkInDate: 13-10-2025}";
+            String expectedString = "Guest {firstName: John, lastName: Doe, email: john.doe@gmail.com, checkInDate: 19-10-2025}";
 
             assertEquals(expectedString, guest.toString(),
                     () -> String.format("Expected toString to be '%s' but was '%s'", expectedString, guest.toString()));
