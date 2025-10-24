@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Room {
+public class Room implements Comparable<Room> {
     private int roomNumber;
     private String type;
     private int capacity;
@@ -111,6 +111,10 @@ public class Room {
         };
     }
 
+    @Override
+    public int compareTo(Room room){
+        return getRoomNumber() - room.getRoomNumber();
+    }
 
     @Override
     public String toString() {

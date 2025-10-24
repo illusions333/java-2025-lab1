@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @DisplayName("Service Repository Tests")
-public class ServiceRepositoryTest {
+public class ServiceGenericRepositoryTest {
     private GenericRepository<Service> serviceRepository;
     private Service service1, service2, service3, service4, service5;
 

@@ -120,6 +120,34 @@ class GenericRepository<T> {
         logger.log(Level.INFO, "Cleared repository. Removed " + sizeBefore + " " + entityType + " items");
     }
 
+    public void sortByIdentity(boolean asc) {
+        if (isIdentityInteger()) {
+            items.sort((item1, item2) -> Integer.parseInt(identityExtractor.extractIdentity(item1)) - Integer.parseInt(identityExtractor.extractIdentity(item2)));
+        }
+        else {
+            items.sort(Comparator.comparing(identityExtractor::extractIdentity));
+        }
+        if (!asc) {
+            Collections.reverse(items);
+        }
+        logger.log(Level.INFO, String.format("Sorted {} by identity in {} order", entityType, asc ? "ascending" : "descending"));
+    }
+
+    public void sortByIdentity(String order) {
+        boolean asc = !"desc".equalsIgnoreCase(order);
+        logger.log(Level.INFO, String.format("sortByIdentity called with order: '{}', interpreted as: {}", order, asc ? "ascending" : "descending"));
+        sortByIdentity(asc);
+    }
+
+    public boolean isIdentityInteger() {
+        try {
+            Integer.parseInt(identityExtractor.extractIdentity(items.getFirst()));
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
     List<T> getItemsForTesting() {
         return items;
     }

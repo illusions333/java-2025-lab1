@@ -98,8 +98,8 @@ public class ReservationTest {
         @Test
         @DisplayName("toString testing")
         void testToString() {
-            assertEquals("Reservation {guest: Guest {firstName: O, lastName: D, email: od@gmail.com, checkInDate: 18-10-2025}, " +
-                    "\nroom: Room {room number: 121, type: presidential, capacity: 4, price: 125.0, room status: occupied}, \nstartDate: 15-10-2025, endDate: 03-11-2025, \n" +
+            assertEquals("Reservation {guest: Guest {firstName: O, lastName: D, email: od@gmail.com, checkInDate: 23-10-2025}, " +
+                    "\nroom: Room {room number: 121, type: presidential, capacity: 4, price: 125.0, room status: occupied}, \nstartDate: 20-10-2025, endDate: 08-11-2025, \n" +
                     "reservationStatus: checked in}", methodData.toString());
         }
     }
