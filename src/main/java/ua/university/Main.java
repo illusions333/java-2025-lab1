@@ -5,13 +5,21 @@ import ua.university.model.*;
 import ua.university.service.RoomListGenerator;
 import ua.university.service.TotalAmountGenerator;
 
+import java.util.List;
+import java.util.Random;
 import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import java.time.LocalDate;
+import java.util.stream.Collectors;
 
 public class Main {
+
+    public static double func(double value) {
+        return Math.log(Math.abs(Math.sin(value)));
+    }
+
     public static void main(String[] args) {
         //configuring logger to show logs of level fine and info
         Logger rootLogger = Logger.getLogger("");
@@ -112,5 +120,46 @@ public class Main {
         System.out.println(RoomListGenerator.generateRoomList(new Room[]{room1, room3}));
         System.out.println();
         System.out.println(TotalAmountGenerator.generateTotalAmount(reservation1, new Service[]{service1, service2, service3, service4}));
+
+        List<Double> items;
+        Random rand = new Random();
+        items = rand.doubles(1000).mapToObj(i -> i)
+                .collect(Collectors.toList());
+        long startTime = System.nanoTime();
+        double sumStream = items.stream()
+                .map(Main::func)
+                .reduce(0d, Double::sum);
+        System.out.println("1000 elements:");
+        long stopTime = System.nanoTime();
+        System.out.print("Stream time: ");
+        System.out.println(stopTime - startTime);
+        long startTime1 = System.nanoTime();
+        double sumParallel = items.parallelStream()
+                .map(Main::func)
+                .reduce(0d, Double::sum);
+        long stopTime1 = System.nanoTime();
+        System.out.print("Parallel time: ");
+        System.out.println(stopTime1 - startTime1);
+
+        List<Double> items2;
+        Random rand2 = new Random();
+        items = rand2.doubles(100000).mapToObj(i -> i)
+                .collect(Collectors.toList());
+
+        System.out.println("\n100000 elements: ");
+        long startTime2 = System.nanoTime();
+        double sumStream2 = items.stream()
+                .map(Main::func)
+                .reduce(0d, Double::sum);
+        long stopTime2 = System.nanoTime();
+        System.out.print("Stream time: ");
+        System.out.println(stopTime2 - startTime2);
+        long startTime3 = System.nanoTime();
+        double sumParallel3 = items.parallelStream()
+                .map(Main::func)
+                .reduce(0d, Double::sum);
+        long stopTime3 = System.nanoTime();
+        System.out.print("Parallel time: ");
+        System.out.println(stopTime3 - startTime3);
     }
 }

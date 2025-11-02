@@ -5,12 +5,15 @@ import org.junit.jupiter.api.*;
 import ua.university.model.Room;
 import ua.university.model.RoomStatus;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class RoomRepositoryTest {
@@ -385,6 +388,74 @@ public class RoomRepositoryTest {
 
             softly.assertAll();
             logger.info("Comparable interface test completed successfully");
+        }
+    }
+
+    @Nested
+    @DisplayName("Stream methods testing")
+    class testStream{
+        @Test
+        @DisplayName("findByType method testing")
+        public void testFindByType(){
+            logger.log(Level.INFO, "Finding by type");
+            List<Room> desiredRooms = roomRepository.findByType("deluxe");
+            SoftAssertions softly = new SoftAssertions();
+            softly.assertThat(desiredRooms).as("Should return 2 rooms").hasSize(2);
+            softly.assertThat(desiredRooms.get(0).getRoomNumber()).isEqualTo(121);
+            softly.assertThat(desiredRooms.get(1).getRoomNumber()).isEqualTo(122);
+            softly.assertAll();
+            logger.log(Level.INFO, "Finding by type test completed successfully");
+        }
+        @Test
+        @DisplayName("findByCapacityBetweenTwoCapacities method testing")
+        public void testFindByCapacityBetweenTwoCapacities(){
+            logger.log(Level.INFO, "Finding by capacity between two capacities");
+            List<Room> desiredRooms = roomRepository.findByCapacityBetweenTwoCapacities(4, 5);
+            SoftAssertions softly = new SoftAssertions();
+            softly.assertThat(desiredRooms).as("Should return 3 rooms").hasSize(3);
+            softly.assertThat(desiredRooms.get(0).getRoomNumber()).isEqualTo(121);
+            softly.assertThat(desiredRooms.get(1).getRoomNumber()).isEqualTo(122);
+            softly.assertThat(desiredRooms.get(2).getRoomNumber()).isEqualTo(13);
+            softly.assertAll();
+            logger.log(Level.INFO, "Finding by capacity between two capacities test completed successfully");
+        }
+        @Test
+        @DisplayName("increasePriceDueInflation method testing")
+        public void testIncreasePriceDueInflation(){
+            logger.log(Level.INFO, "Increase price due inflation");
+            List<Room> desiredRooms = roomRepository.increasePriceDueInflation(0.5f);
+            SoftAssertions softly = new SoftAssertions();
+            softly.assertThat(desiredRooms).as("Should return 5 rooms").hasSize(5);
+            softly.assertThat(desiredRooms.get(0).getPrice()).isEqualTo(3375);
+            softly.assertThat(desiredRooms.get(1).getPrice()).isEqualTo(7500);
+            softly.assertThat(desiredRooms.get(2).getPrice()).isEqualTo(3750);
+            softly.assertThat(desiredRooms.get(3).getPrice()).isEqualTo(3750);
+            softly.assertThat(desiredRooms.get(4).getPrice()).isEqualTo(3375);
+            softly.assertAll();
+            logger.log(Level.INFO, "Increase price due inflation test completed successfully");
+        }
+
+        @Test
+        @DisplayName("findRoomsThatMatchesOneOfTheTypes method testing")
+        public void testFindRoomsThatMatchOneOfTheTypes(){
+            logger.log(Level.INFO, "Finding rooms that match one of the types method testing");
+            List<String> types = List.of("Deluxe", "Presidential");
+            List<Room> desiredRooms = roomRepository.findRoomsThatMatchOneOfTheTypes(types);
+            SoftAssertions softly = new SoftAssertions();
+            softly.assertThat(desiredRooms).as("Should return 3 rooms").hasSize(3);
+            softly.assertThat(desiredRooms.get(0).getRoomNumber()).isEqualTo(121);
+            softly.assertThat(desiredRooms.get(1).getRoomNumber()).isEqualTo(122);
+            softly.assertThat(desiredRooms.get(2).getRoomNumber()).isEqualTo(21);
+            softly.assertAll();
+            logger.log(Level.INFO, "Finding rooms that match one of the types method testing finished completing");
+        }
+
+        @Test
+        @DisplayName("getMaxOccupancy method testing")
+        public void testGetMaxOccupancy(){
+            logger.log(Level.INFO, "Get max occupancy method testing");
+            int result = roomRepository.getMaxOccupancyOfHotel();
+            assertEquals(result, 17);
         }
     }
 }
